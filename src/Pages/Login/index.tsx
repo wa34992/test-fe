@@ -7,14 +7,24 @@ import { callLoginRequest } from './redux/reducer';
 
 const Login = () => {
   const dispatch = useDispatch();
+   const [loginInputState, setLoginInputState] = useState({
+    email: "",
+    password: ""
+  })
 
+  const handleChange =(evt: any)=> {
+    const value = evt.target.value;
+    console.log("value", value)
+    setLoginInputState({
+      ...loginInputState,
+      [evt.target.name]: value
+    });
+  }
 
-  const submitLogin = () => {
-  
-    dispatch(callLoginRequest({
-      "username": "test_1",
-      "password": "test_1"
-    }))
+  const submitLogin = (event: any) => {
+    console.log("login input state", event.target.value)
+    event.preventDefault()
+    dispatch(callLoginRequest(loginInputState))
   }
 
   return (
@@ -27,19 +37,17 @@ const Login = () => {
             </div>
             <div className="col-md-6 form-area">
               <h2>Login</h2>
-              {/* <form action="#"> */}
+              <form onSubmit={submitLogin}>
                 <div className="mb-3">
                   <label htmlFor="email" className="form-label">Email address</label>
-                  <input type="email" className="form-control" id="email" placeholder="Enter email" />
+                  <input type="email" name='email' className="form-control"  id="email" placeholder="Enter email" />
                 </div>
-
                 <div className="mb-3">
                   <label htmlFor="password" className="form-label">Password</label>
-                  <input type="password" className="form-control" id="password" placeholder="Password" />
+                  <input type="password" name='password' className="form-control" id="password" placeholder="Password" />
                 </div>
-
-                <button type="submit" onClick={submitLogin} className="btn btn-primary w-100 mt-4">Login</button>
-              {/* </form> */}
+                <button type="submit" className="btn btn-primary w-100 mt-4">Login</button>
+              </form>
             </div>
           </div>
         </div>
