@@ -32,9 +32,11 @@ axios.interceptors.response.use(
   (error) => Promise.reject(error.response || error.request || error.message)
 );
 
+console.log("Being Called")
+
 const http = {
   setAuthorizationHeader(accessToken: string) {
-    // console.log(accessToken);
+    console.log("accessTokenaccessTokenaccessToken", accessToken);
 
     axios.defaults.headers.common["Authorization"] = "Bearer " + accessToken;
     axios.defaults.headers.Authorization = "Bearer " + accessToken;

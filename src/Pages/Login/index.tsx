@@ -5,27 +5,15 @@ import { callLoginRequest } from './redux/reducer';
 
 
 
-const Login = () => {
+const Login = ({history}) => {
   const dispatch = useDispatch();
-   const [loginInputState, setLoginInputState] = useState({
-    email: "",
-    password: ""
-  })
-
-  const handleChange =(evt: any)=> {
-    const value = evt.target.value;
-    console.log("value", value)
-    setLoginInputState({
-      ...loginInputState,
-      [evt.target.name]: value
-    });
-  }
 
   const submitLogin = (event: any) => {
+    event.preventDefault()
     const data = event.target.elements
     console.log("login input state", event.target.elements.email.value)
     dispatch(callLoginRequest({"email": data.email.value, "password": data.password.value}))
-    event.preventDefault()
+    history.push('/product')
   }
 
   return (

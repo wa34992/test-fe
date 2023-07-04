@@ -32,16 +32,15 @@ async function postLoginApi(data: any) {
 
 function* postLogin(data) {
 
-  console.log({data})
   try {
     const response = yield call(postLoginApi, data.payload)
     
-  console.log({response})
+  console.log("responseresponse", response)
     yield put(authentication(response.data))
   } catch (e) {
     const { response } = e
     if (response) {
-      // yield put(loginRequestFailure(response?.data ? response?.data : false))
+      yield put(loginRequestFailure(response?.data ? response?.data : false))
 
       // toast.error(
       //   response?.data?.non_field_errors

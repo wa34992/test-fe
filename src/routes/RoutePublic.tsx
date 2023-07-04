@@ -9,7 +9,7 @@ type routeProps = {
   path: string;
 };
 
-const RouteComponent = ({
+const RoutePublic = ({
   component: Component,
   isAuthenticated,
   to,
@@ -24,14 +24,14 @@ const RouteComponent = ({
   />
 );
 
-RouteComponent.propTypes = {
+RoutePublic.propTypes = {
   component: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   to: PropTypes.string,
 };
 
-RouteComponent.defaultProps = {
+RoutePublic.defaultProps = {
   to: "/",
 };
 
-export default RouteComponent;
+export default RoutePublic;

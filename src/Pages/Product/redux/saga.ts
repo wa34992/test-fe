@@ -1,9 +1,11 @@
+import axios from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects"
 // import AsyncStorage from '@react-native-community/async-storage';
 // config
 // utils
 import http from "../../../Api/http"
 import { BASE_URL } from "../../../config"
+import { store } from "../../../reduxStore/store";
 
 import { setAllProducts, getAllProducts } from './reducer'
 
@@ -34,17 +36,31 @@ import { setAllProducts, getAllProducts } from './reducer'
 //   return http.post(URL, options)
 // }
 
+const getHeader = () => {
+  const state = store.getState();
+  const authToken = state.loginSlice.access
+
+  return {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${authToken}`,
+    }
+  };
+};
+
 async function getAllProductApi() {
-  const URL = `${BASE_URL}/products`
+  const URL = `${BASE_URL}/products/`
   const options = {
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json"
-    },
-    method: "POST",
+      "Content-Type": "application/json",
+      "Authorization": getHeader()
+    }
     // data
   }
-  return http.post(URL, options)
+  console.log('getHeader()', getHeader())
+  return http.get(URL, getHeader())
 }
 
 function* getAllProd() {

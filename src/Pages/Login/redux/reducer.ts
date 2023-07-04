@@ -1,21 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit'
 // import type { PayloadAction } from '@reduxjs/toolkit'
 
-export interface CounterState {
-  data: any
+export interface LoginState {
+  access: string
+  refresh: string
 }
 
-const initialState: CounterState = {
-  data: {}
+const initialState: LoginState = {
+  access: '',
+  refresh: ''
 }
 
 export const loginSlice = createSlice({
   name: 'Login',
   initialState,
   reducers: {
-    callLoginRequest: () => { },
+    callLoginRequest: () => {  },
     authentication: (state, payload) => {
-      state.data = payload
+      state.access = payload.payload.access
+      state.refresh = payload.payload.refresh
     }
   },
 })
