@@ -22,9 +22,10 @@ const Login = () => {
   }
 
   const submitLogin = (event: any) => {
-    console.log("login input state", event.target.value)
+    const data = event.target.elements
+    console.log("login input state", event.target.elements.email.value)
+    dispatch(callLoginRequest({"email": data.email.value, "password": data.password.value}))
     event.preventDefault()
-    dispatch(callLoginRequest(loginInputState))
   }
 
   return (
